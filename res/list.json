@@ -1,0 +1,67 @@
+[
+     {
+        "name" : "Addictive clicks", 
+        "bgImg" : "img/img-008.jpg", 
+        "path" : "pages/Addictive clicks.html" 
+    },
+    {
+        "name" : "Rect-SVG effect", 
+        "bgImg" : "img/img-010.jpg", 
+        "path" : "pages/Rect-SVG effect.html" 
+    }, 
+    {
+        "name" : "Linear Gradients", 
+        "bgImg" : "img/img-007.jpg", 
+        "path" : "pages/Linear Gradients.html" 
+    },  
+    {
+        "name" : "Calculator 2.4", 
+        "bgImg" : "img/img-006.jpg", 
+        "path" : "pages/Calculator 2.4.html" 
+    },
+    {
+        "name" : "Stone Paper Scissor", 
+        "bgImg" : "img/img-009.jpg", 
+        "path" : "pages/Stone Paper Scissor.html" 
+    }, 
+    {
+        "name" : "Clock", 
+        "bgImg" : "img/img-005.jpg", 
+        "path" : "pages/Clock.html" 
+    },
+    {
+        "name" : "Tic Tack Toe", 
+        "bgImg" : "img/img-003.jpg",
+        "path" : "pages/Tic Tack Toe.html"
+    },  
+    {
+        "name" : "My Drawing Book", 
+        "bgImg" : "img/img-004.jpg",
+        "path" : "pages/My Drawing Book.html"
+    },
+    {
+        "name" : "3D Cube", 
+        "bgImg" : "img/img-001.jpg",
+        "path" : "pages/3D Cube.html"
+    }, 
+    {
+        "name" : "SVG Paint", 
+        "bgImg" : "img/img-002.jpeg",
+        "path" : "pages/SVG Paint.html"
+    },
+    {
+        "name" : "CanvasPaint", 
+        "bgImg" : "img/img-011.jpg", 
+        "path" : "pages/CanvasPaint.html" 
+    },
+    {
+        "name" : "Bouncing Ball", 
+        "bgImg" : "img/img-012.jpg", 
+        "path" : "pages/Bouncing Ball.html" 
+    }, 
+    {
+        "name" : "Calculator 3.0", 
+        "bgImg" : "img/img-013.jpg", 
+        "path" : "pages/Calculator 3.0.html" 
+    }
+]

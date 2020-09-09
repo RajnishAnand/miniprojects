@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Clock</title>
+    <!-- just a Cool Font -->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <style>
+        body {
+            background: #222;
+            color: #fff;
+            font-family: 'Varela Round', sans-serif;
+            font-weight: 900;
+            margin: 0;
+            transition: 1s linear;
+            user-select: none;
+            height: 100vh;
+        }
+
+        #tyme {
+            position: absolute;
+            font-size: 3em;
+            padding: 2px;
+            padding-left: 10px;
+            padding-right: 10px;
+            left: 50%;
+            transform: translate(-50%);
+            top: 3.25em;
+            border-radius: 10px;
+            text-shadow: 0px 0px 1px black;
+            user-select: none;
+        }
+
+        svg {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        circle {
+            fill: #f50;
+            stroke: #ddd;
+            stroke-width: 12;
+            transform-origin: 50% 50%;
+            stroke-linecap: round;
+            stroke-dashoffset: 300%;
+            transform: rotate(-90deg);
+            transition: 1s linear;
+        }
+
+        #a3 {
+            fill: #222;
+        }
+
+        span {
+            text-shadow: 0px 0px 1px black;
+            color: #def;
+        }
+
+        #ampm {
+            position: absolute;
+            top: 14em;
+            left: 50%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+
+        #ddmmyyyy {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            top: 4.5em;
+            font-size: 1.6em;
+        }
+
+        #daay {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            top: 2.6em;
+            font-size: 1.5em;
+        }
+
+        footer {
+            background: #0005;
+            position: fixed;
+            padding: 5px;
+            padding-top: 10px;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            border-top: solid 1px #aaa;
+            font-family: Courier;
+            font-weight: 400;
+        }
+    </style>
+</head>
+
+<body>
+    <svg height="350px" width="350px">
+        <circle id="a1" cx="50%" cy="50%" r="45%" />
+        <circle id="a2" cx="50%" cy="50%" r="41%" />
+        <circle id="a3" cx="50%" cy="50%" r="37%" />
+    </svg>
+    <span id="tyme"></span>
+    <span id="ampm"></span>
+    <span id="daay"></span>
+    <span id="ddmmyyyy"></span>
+    <footer>By Rajnish Anand । 2020 </footer>
+    <script>
+        var am_pm, dayno;
+
+        //calls date per 0.001s
+        setInterval(mngr, 100);
+
+        //Manager
+        function mngr() {
+            progbar();
+            setTimeDate();
+        };
+
+        //one time call for Date
+        dt();
+
+        //offers Date time etc....
+        function dt(retrnVal) {
+            dateA = new Date();
+
+            a = dateA.getHours();
+            if (a > 12) { a -= 12;
+                am_pm = "PM"; }
+            else { if (a == 0) { a = 12; };
+                am_pm = "AM"; };
+
+            a = fx(a);
+            b = fx(dateA.getMinutes());
+            c = fx(dateA.getSeconds());
+
+            dayno = dateA.getDay();
+            day = fx("day");
+            date = fx(dateA.getDate());
+            month = fx(dateA.getMonth() + 1);
+            year = dateA.getFullYear();
+
+            tym = a + ":" + b + ":" + c;
+            dmy = date + "/" + month + "/" + year;
+            return retrnVal;
+        };
+
+        //small fix for Date
+        function fx(num) {
+            if (num <= 9) { num = "0" + num; };
+            if (num == "day") {
+                num = dayno;
+                switch (num) {
+                    case 1:
+                        num = "MON";
+                        break;
+                    case 2:
+                        num = "TUE";
+                        break;
+                    case 3:
+                        num = "WED";
+                        break;
+                    case 4:
+                        num = "THU";
+                        break;
+                    case 5:
+                        num = "FRI";
+                        break;
+                    case 6:
+                        num = "SAT";
+                        break;
+                    case 0:
+                        num = "SUN";
+                        break;
+                };
+            };
+            return num;
+        };
+
+        //sets date, time, day
+        function setTimeDate() {
+            tyme.innerHTML = dt(tym);
+            ampm.innerHTML = am_pm;
+            daay.innerHTML = dt(day);
+            ddmmyyyy.innerHTML = dt(dmy);
+        };
+
+        //progress bar
+        function progbar() {
+            a1.style.strokeDasharray = 300 + (dt(c) / 60) * (584 - 300) + "%";
+            b = (dt(b) == 0) ? 0.01 : dt(b);
+            a2.style.strokeDasharray = 300 + (b / 60) * (556 - 300) + "%";
+            a = (dt(a) == 12) ? 0.001 : dt(a);
+            a3.style.strokeDasharray = 300 + (a / 12) * (533 - 300) + "%";
+        };
+
+        //changes background
+        axc = (dt(c) / 60) * 255;
+        ayc = (dt(c) / 60) * 127;
+
+        setInterval(changeColor, 100);
+
+        function changeColor() {
+            x = lnrGrdnt();
+            document.body.style = "background:" + x + ";";
+        };
+
+        function lnrGrdnt() {
+            axc++;
+            ayc--;
+            if (axc > 360) { axc = 0 };
+            if (ayc < 0) { ayc = 360 };
+            asz = "linear-gradient(30deg,hsl(" + axc + ",100%,40%),hsl(" + ayc + ",100%,40%))"
+            return asz;
+        };
+    </script>
+</body>
+
+</html>

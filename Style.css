@@ -1,0 +1,112 @@
+body {
+    margin:0;
+    background: -webkit-linear-gradient(30deg, #aa00ff, #00ddff);
+    background: -moz-linear-gradient(30deg, #aa00ff, #00ddff);
+    background: -o-linear-gradient(30deg, #aa00ff, #00ddff);
+    background: linear-gradient(120deg, #aa00ff, #00ddff);
+    background-attachment:fixed;
+    color:#ffffff;
+    font-family:sans-serif;
+}
+h1{    
+    background:-webkit-linear-gradient(30deg, #580184, #294e99);
+    background:-moz-linear-gradient(30deg, #580184, #294e99);
+    background:-o-linear-gradient(30deg, #580184, #294e99);
+    background:linear-gradient(120deg, #580184, #294e99);
+    color:#ffffff;
+    font-weight:100;
+    margin:0;
+    padding-bottom:5px;
+    text-shadow:1px 1px #000;
+    border-bottom:solid 3px #ffffff;
+    position:sticky;
+    top:0;
+    user-select:none;
+}
+.svgIco{
+    height:32px;
+    width:32px;
+    border:solid 1px #ffffff;
+    border-radius:4px;
+    margin:0;
+    fill:none;
+    stroke-width:5px;
+    stroke:#fff;
+    stroke-linecap:round;
+    margin-left:6px;
+    position:relative;
+    top:6px;
+    transition:.2s;
+}
+#side_Nav:active{
+    stroke-width:0;
+    border-radius:50%;
+    box-shadow:0 0 0 2px #ffffff inset;
+    transform:rotate(135deg);
+}
+.pogs{
+    margin:10px;
+    background-color:#00000000;
+    height:15em;
+    width:25em;
+    border-radius:5px;
+     box-shadow:0 0 0 3px inset #ffffff,
+                0 25px #383793 inset, 
+                0 26px #ffffff inset; 
+    line-height:25px;
+    text-align:center;
+    color:#eeeeff;
+    font-weight:300;
+    text-shadow:0 0 2px #000000;
+}
+#sidebar{
+    position:fixed;
+    width:10em;
+    height:100%;
+    top:50px;
+    bottom:0;
+    background:#121212;
+    border-right:solid 3px #ffffff;
+    left:-11em;
+    transition:0.8s ease;
+    overflow:auto;
+}
+#sidebar div{
+    text-align:center;
+    background:#00000066;
+    margin:5px;
+    font-size:1em;
+    font-weight:300;
+    border:solid 1px #aaaaaa;
+    border-radius:2px;
+    transition:.2s;
+    user-select:none;
+}
+#sidebar div:active{
+    Background:#aaaaaa;
+}
+#sidebar img{
+    position:relative;
+    width:40%;
+    left:50%;
+    transform:translate(-50%);
+    border:solid 2px #50A4FF;
+    border-radius:50%;
+    margin-top:10px;
+}
+#disply{
+    text-align :center ;
+    color:#ffffff;
+    text-shadow :0 0 1px #000000 ;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    position:fixed;
+    overflow:auto;
+    top:3.2em;
+    bottom:0;
+    left:0;
+    right:0;
+    transition:0.8s ease;
+    outline:solid 0px #f00;
+}

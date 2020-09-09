@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Minigram</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <link href="Style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h1>
+        <svg id="side_Nav" class="svgIco">
+            <path d="M4 7 L28 7 M4 16 L28 16 M4 25 L28 25" />
+        </svg>
+        Minigram
+    </h1>
+    <div id="sidebar">
+        <img src="https://drive.google.com/uc?export=download&id=11O5RxFweuOK5XlBYU37zdGA3qgxzrDAg">
+        <div>
+          𝕽𝖆𝖏𝖓𝖎𝖘𝖍 𝖆𝖓𝖆𝖓𝖉
+        </div>
+        <div>
+            ----ℹ️----<br>
+            Adjusted for Android<br>
+            Best view in Chrome<br>
+            Last Updated: 07/09/2020
+        </div>
+    </div>
+    <div id="disply"></div>
+    <script>
+//For sidebar button
+let sidebarIcoClickCount = 0;
+sidebarIcoF = () => {
+    sidebarIcoClickCount++;
+    if (sidebarIcoClickCount % 2 != 0) {
+        side_Nav.innerHTML = '<path d="M6 6 L26 26 M6 26 L26 6" />';
+        sidebar.style.left = "0";
+        disply.style.left='10.3em';
+    }
+    else {
+        side_Nav.innerHTML = '<path d="M4 7 L28 7 M4 16 L28 16 M4 25 L28 25" />';
+        sidebar.style.left = "-11em";
+        disply.style.left='0';
+    };
+};
+side_Nav.addEventListener("click", sidebarIcoF);
+//-----------------------------------------
+
+
+
+//-----------------------------------------
+//requests for contents
+window.onload=()=>{
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            req(this);
+        };
+        xhttp.open("GET", "/res/list.json?q="+Math.random(), true);
+        xhttp.send();
+};
+
+function req(ev){
+    let a=ev.readyState;
+    let b=ev.status;
+    if(a==4&&b==200){
+        disply.innerHTML="";
+        let c=JSON.parse(ev.responseText);
+        let lastEl=null;
+        for(let each of c){
+            let el=document.createElement("div");
+            disply.insertBefore(el,lastEl);
+            el.className="pogs";
+            el.innerHTML=each.name;
+            el.style.background="url("+each.bgImg+") center /100% ";
+            el.onclick=()=>{
+                location.assign(each.path);
+            };
+            lastEl=el;
+        };
+    }
+    else if(a<4){
+        disply.innerHTML="Loading..";
+    }
+    else{
+        disply.innerHTML="error"+b+"<br>"+ev.statusText;
+        };
+};
+//-----------------------------------------
+
+
+
+//-----------------------------------------
+    </script>
+</body>
+
+</html>

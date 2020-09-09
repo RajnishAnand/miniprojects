@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Effect</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+body {
+    background:#222222;
+    margin:0px;
+}
+svg{
+    outline:solid 1px #ccc;
+    margin-left:1px;
+    margin-top:2px;
+    border:solid 1px black;
+    position:fixed;
+}
+polyline{
+    stroke-linejoin:miter;
+    stroke:white;
+    stroke-width:2;
+    fill: none;
+}
+#fps{
+    background:#aaa;
+    border-radius:3px;
+    color:white;
+}
+circle{
+    outline:solid 0.5px skyblue;
+    fill:rgba(0,0,0,0.4);
+    transition:1s ease;
+}
+        </style>
+    </head>
+    <body>
+        <svg id="svg" height="100%" width="100%">
+            <circle cy="220" cx="220" r="100" fill="deepskyblue"/>
+            <circle cy="100" cx="100" r="100" fill="red"/>
+            <polyline points="75 50,50 50,50 100,75 100"/>
+            <polyline points="100 50,100 100,125 100"/>
+            <polyline points="140 50,150 50,145 50,145 100,140 100,150 100"/>
+            <polyline points="200 50,175 50,175 100,200 100"/>
+            <polyline points="225 50,225 100,225 75,250 50,225 75,250 100"/>
+        </svg>
+        <script>
+        var col,x;
+document.addEventListener("click",bubl);
+function bubl(){
+svg.innerHTML+="<circle cx='"+Math.ceil(Math.random()*innerWidth)+"' cy='"+Math.ceil(Math.random()*innerHeight)+"' r='"+Math.ceil(Math.random()*100)+"'/>";
+requestAnimationFrame(bubl);
+};
+        </script>
+    </body>
+</html>

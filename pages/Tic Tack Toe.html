@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tic Tack Toe</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(30deg, hsl(326, 100%, 60%), hsl(33, 100%, 60%));
+            background-attachment: fixed;
+        }
+
+        table {
+            position: absolute;
+            height: 0;
+            width: 0;
+            left: 50%;
+            transform: translate(-50%);
+        }
+
+        tr {
+            display: flex;
+        }
+
+        td {
+            display: inline-block;
+            background: #fff5;
+            text-align: center;
+            font-size: 5em;
+            font-weight: 100;
+            color: #fff;
+            margin: 1px;
+            box-shadow: 0 0 10px 3px #fffa inset;
+            z-index: 1;
+        }
+
+        #cov {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        #plyAgn,
+        #turn {
+            position: fixed;
+            bottom: 10px;
+            left: 110px;
+            transform: translate(-50%);
+            background: #fff1;
+            padding: 10px;
+            font-size: 1.5em;
+            border-radius: 1em;
+            font-family: monospace;
+            box-shadow: 5px 5px 10px #0003,
+                -5px -5px 10px #fff5;
+            user-select: none;
+            z-index: 3;
+        }
+
+        #plyAgn:active {
+            box-shadow: 5px 5px 10px #0003,
+                -5px -5px 10px #fff5,
+                5px 5px 10px #0003 inset,
+                -5px -5px 10px #fff5 inset;
+        }
+
+        #turn {
+            bottom: 4em;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <div id="cov"></div>
+    <div id="plyAgn">Play Again</div>
+    <div id="turn">Turn : Player⁠✘</div>
+    <!--div id="score">
+            Score<br>
+            ✘ : 0<br>
+            ⵔ : 0
+        </div-->
+</body>
+<script>
+    //let bord=document.querySelector("table");
+    let cells = document.querySelectorAll("td");
+    //-------------------------------------------
+
+
+
+    //-------------------------------------------
+    //Adjusts according to the device screen size
+    const adjust = () => {
+        let a = innerHeight;
+        let b = innerWidth;
+        let c = (a > b) ? b : a;
+
+        for (cell of cells) {
+            cell.style.height = c / 3 - 5 + "px";
+            cell.style.width = c / 3 - 5 + "px";
+
+            cell.style.lineHeight = c / 3 - 5 + "px";
+        };
+    };
+    adjust();
+    //-------------------------------------------
+
+
+
+    //-------------------------------------------
+    let clickCount = 0;
+    //The Main function writes O & X & changes background color of the winning blocks
+    const main = (ev) => {
+        let a = (clickCount % 2) ? "ⵔ" : "✘";
+        let b = ev.currentTarget;
+
+        if (b.innerHTML == "") {
+            b.innerHTML = a;
+            clickCount++;
+            a = (clickCount % 2) ? "ⵔ" : "✘";
+            turn.innerHTML = "Turn : Player⁠" + a;
+        };
+
+        adjust();
+
+        if (declr() != false) {
+            for (let winner of declr()) {
+                cells[winner].style.background = "#fffa";
+                cells[winner].style.color = "#000";
+
+                cov.style.height = "100%";
+                cov.style.width = "100%";
+            };
+        };
+    };
+    //-------------------------------------------
+
+
+
+    //-------------------------------------------
+    //returns the block of winner
+    const declr = () => {
+        if (check(0, 1, 2)) { return [0, 1, 2] }
+        else if (check(3, 4, 5)) { return [3, 4, 5] }
+        else if (check(6, 7, 8)) { return [6, 7, 8] }
+        else if (check(0, 3, 6)) { return [0, 3, 6] }
+        else if (check(1, 4, 7)) { return [1, 4, 7] }
+        else if (check(2, 5, 8)) { return [2, 5, 8] }
+        else if (check(0, 4, 8)) { return [0, 4, 8] }
+        else if (check(2, 4, 6)) { return [2, 4, 6] }
+        else { return false };
+    };
+
+    //Checks if player is winning
+    const check = (a, b, c) => {
+        let d = [];
+        for (let i = 0; i < 9; i++) {
+            d[i] = cells[i].innerHTML;
+        };
+        if (d[a] == d[b] && d[b] == d[c] && d[a] != "") {
+            return true;
+        }
+        else { return false; };
+    };
+    //-------------------------------------------
+
+
+
+    //-------------------------------------------
+    //Play Again button function
+    const playAgain = () => {
+        for (cell of cells) {
+            cell.innerHTML = "";
+            cell.style.background = "#fff5";
+            cell.style.color = "#fff";
+        };
+        cov.style.height = 0;
+        cov.style.width = 0;
+    };
+    //-------------------------------------------
+
+
+
+    //-------------------------------------------
+    //Makes buttons moveable
+    const moveBtn = (ev) => {
+        let x = ev.touches[0].clientX;
+        let y = ev.touches[0].clientY;
+        ev.currentTarget.style.bottom = innerHeight - y + "px";
+        ev.currentTarget.style.left = x + "px";
+    };
+    //-------------------------------------------
+
+
+
+    //-------------------------------------------
+    //Event Listeners
+    plyAgn.addEventListener("click", playAgain);
+    plyAgn.addEventListener("touchmove", moveBtn);
+    turn.addEventListener("touchmove", moveBtn);
+
+
+    for (cell of cells) {
+        cell.addEventListener("click", main)
+    };
+</script>
+
+</html>

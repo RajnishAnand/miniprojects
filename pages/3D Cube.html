@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cube</title>
+    <meta charset="UTF-8" />
+    <style>
+        body {
+            background: #1976d2;
+            margin: 0;
+        }
+
+        #cube {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            perspective-origin: 50% 50%;
+            transform-style: preserve-3d;
+        }
+
+        .cuide {
+            background: #000;
+            position: absolute;
+            text-align: center;
+            font-family: Courier;
+            color: #0fd;
+            text-shadow: 0px 0px 1px #000;
+            height: 5em;
+            width: 5em;
+            transform-origin: 50% 50%;
+            font-size: 3em;
+            left: 50%;
+            top: 50%;
+            margin-left: -2.7em;
+            margin-top: -2.7em;
+            line-height: 5em;
+            opacity:0.8;
+            border: inset 0.2em #fff9;
+            user-select: none;
+            background:#0000;
+            background-size:100%;
+        }
+        #font {
+            background: #051D8F;
+            transform: translateZ(2em);
+        }
+
+        #back {
+            background:#0f0;
+            transform: translateZ(-2em) rotateY(180deg);
+        }
+
+        #left {
+            background: #f50;
+            transform: rotateY(270deg) translateZ(2em);
+        }
+
+        #right {
+            background:#0df;
+            transform: rotateY(-270deg) translateZ(2em);
+        }
+
+        #top {
+            background: #ff0;
+            transform: rotateX(90deg) translateZ(2em);
+        }
+
+        #bottm {
+            background: #d5f;
+            transform: rotateX(-90deg) translateZ(2em);
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 5px;
+            height: 1em;
+            text-align: center;
+            color: #fff;
+            font-family: Courier;
+            background: #444;
+            transition: 1s ease;
+            user-select: none;
+        }
+
+        #auto {
+            position: fixed;
+            background: #def;
+            height: 1.5em;
+            width: 5em;
+            bottom: 1.6em;
+            left: 50%;
+            margin-left: -3em;
+            padding-top: 1em;
+            line-height: 1.5em;
+            font-family: sans-serif;
+            text-align: center;
+            border-radius: 5em 5em 0 0;
+            border: solid 0.5em #0df;
+            border-right-color: #fa0;
+            border-left-color: #fa0;
+            box-shadow: 0px 0px 1px #000;
+            border-bottom: none;
+            transition: 0.25s ease, bottom 1s ease;
+            user-select: none;
+            color: #000;
+        }
+
+        #auto:active {
+            font-size: 1.2em;
+            bottom: 1.2em;
+            color: #def;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+    <div id="cube">
+        <div id="font" class="cuide">😇</div>
+        <div id="back" class="cuide">😊</div>
+        <div id="left" class="cuide">☺️</div>
+        <div id="right" class="cuide">🤩</div>
+        <div id="top" class="cuide">😋</div>
+        <div id="bottm" class="cuide">🤗</div>
+    </div>
+    <div id="auto">Auto</div>
+    <footer>Swipe to rotate</footer>
+    <script>
+//Manual Swipe Script-----------------------
+var xd, yd, x = 0,y = 0,xdeg = 0,ydeg = 0;
+let remb=[0, 0];
+
+const touchStart = (ev) => {
+    if (auto.innerHTML == "Auto") {
+        xd = ev.touches[0].clientX;
+        yd = ev.touches[0].clientY;
+        xT = window.innerWidth;
+        yT = window.innerHeight;
+        remb=[xdeg, ydeg];
+    };
+};
+
+touchMove = (ev) => {
+    if (auto.innerHTML == "Auto") {
+        document.getElementsByTagName("footer")[0].style = "height:0;padding:0;";
+        auto.style.bottom = 0;
+        ev.preventDefault();
+        xu = ev.touches[0].clientX;
+        yu = ev.touches[0].clientY;
+        x = xu - xd;
+        y = yd - yu;
+        
+        xdeg =remb[0] + x*0.5;
+        ydeg =remb[1] +y*0.5;
+    };
+};
+
+const touchEnd = () => {
+    if (auto.innerHTML == "Auto") {
+        xdeg =remb[0] + x*0.5;
+        ydeg =remb[1] +y*0.5;
+        xd = yd = x = y = 0;
+    };
+};
+
+cube.addEventListener("touchstart", touchStart);
+cube.addEventListener("touchmove", touchMove);
+cube.addEventListener("touchend", touchEnd);
+//-------------------------------------------
+
+
+
+//-------------------------------------------
+//Auto Rotate--------------------------------
+let atoAng=[0,0,0,xdeg,ydeg];
+autoRotate = () => {
+    if(atoAng[2]==100){
+        atoAng=[
+            Math.abs(Math.random()*360),
+            Math.abs(Math.random()*360), 
+            0,
+            xdeg,
+            ydeg
+        ];
+    };
+    atoAng[2]++;
+    xdeg=atoAng[3]+atoAng[0]*atoAng[2]/150;
+    ydeg=atoAng[4]+atoAng[1]*atoAng[2]/150;
+        
+    if(auto.innerHTML=='Manual'){
+        requestAnimationFrame(autoRotate);
+    };
+};
+
+//-------------------------------------------
+
+
+
+//-------------------------------------------
+const rotate = () => {
+  xdeg=(xdeg>360)?xdeg%360:(xdeg<0)?360+xdeg:xdeg;
+  ydeg=(ydeg>360)?ydeg%360:(ydeg<0)?360+ydeg:ydeg;
+  
+  cube.style.transform = "rotateX(" + ydeg + "deg) rotateY(" + xdeg + "deg)";
+  requestAnimationFrame(rotate);
+};
+rotate();
+//-------------------------------------------
+
+
+
+//-------------------------------------------
+//The-Auto-Manual-Button---------------------
+var autoClick_count = 1;
+
+autoBtnClick = () => {
+    autoClick_count++;
+    if (autoClick_count % 2 == 0) {
+        auto.innerHTML = "Manual";
+        auto.style.borderTopColor = "#fa0";
+        auto.style.borderLeftColor = "#0df";
+        auto.style.borderRightColor = "#0df";
+        
+        atoAng=[Math.abs(Math.random()*360),
+                Math.abs(Math.random()*360), 
+                0,xdeg,ydeg];
+        autoRotate();
+    }
+    else {
+        auto.innerHTML = "Auto";
+        auto.style.borderTopColor = "#0df";
+        auto.style.borderLeftColor = "#fa0";
+        auto.style.borderRightColor = "#fa0";
+    };
+    document.getElementsByTagName("footer")[0].style = "height:0;padding:0;";
+    auto.style.bottom = 0;
+};
+
+auto.addEventListener("click", autoBtnClick);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!--By Rajnish Anand -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Linear-gradient</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="Linear Gradient.css" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            transition: 1s ease;
+            font-family:sans-serif;
+        }
+
+        #colorNym {
+            background: #333;
+            color: white;
+            outline: solid 1px black;
+            border: solid 1px white;
+            width: 98%;
+            height: 2em;
+            font-family: Courier;
+            padding-left: 5px;
+            user-select: all;
+        }
+
+        #nxt {
+            position: relative;
+            background: red;
+            color: white;
+            padding: 4.5px;
+            padding-left: 20px;
+            padding-right: 20px;
+            top: -2px;
+            right: -3px;
+            font-size: 2em;
+            border-radius: 10px 0 0 10px;
+            box-shadow: 0px 0px 2px black;
+            transition: 0.5s ease;
+            touch-action: none;
+            user-select: none;
+        }
+
+        #nxt:active {
+            margin-right: 20px;
+        }
+
+        #slct {
+            position: relative;
+            background: red;
+            color: white;
+            font-size: 2.37em;
+            border: none;
+            border-radius: 0 10px 10px 0;
+            outline: none;
+            box-shadow: 0px 0px 2px black;
+        }
+
+        #bod {
+            position: fixed;
+            display: inline;
+            left: 50%;
+            transform: translate(-50%);
+            bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <input id="colorNym" placeholder="your Gradient/Color">
+    <span id="bod">
+        <span id="nxt">Next</span>
+        <select id="slct">
+            <option value="1">2</option>
+            <option value="2">3</option>
+            <option value="3">4</option>
+            <option value="4">5</option>
+            <option value="5">6</option>
+            <option value="6">7</option>
+            <option value="7">8</option>
+        </select>
+    </span>
+    <script>
+        var a = 1;
+        body = document.body;
+        starty();
+        nxt.addEventListener("click", function() {
+            starty();
+            bod.style = '';
+        });
+
+        function starty() {
+            colar = gradienty();
+            body.style = 'background:' + colar + ';';
+            colorNym.value = colar;
+        };
+
+        function gradienty() {
+            y = rndmCol();
+            for (i = 1; i <= slct.value; i++) {
+                y += ',' + rndmCol();
+            };
+            x = 'linear-gradient(30deg,' + y + ')';
+            return x
+        };
+
+        function rndmCol() {
+            x = 'rgb(' + rndmval(255) + ',' + rndmval(255) + ',' + rndmval(255) + ')';
+            return x;
+        };
+
+        function rndmval(val) {
+            x = Math.ceil(Math.random() * val);
+            return x;
+        };
+
+        document.addEventListener("input", function() {
+            body.style = 'background:' + colorNym.value + ';';
+        });
+    </script>
+</body>
+
+</html>

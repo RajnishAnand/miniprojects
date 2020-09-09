@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+</head>
+
+<body>
+    <input id="a1">
+    <input id="a2">
+    <select id="a3">
+        <option>jpg</option>
+        <option>jpeg</option>
+        <option>png</option>
+    </select>
+    <button id="a4">submit</button>
+    <div contenteditable id="a5" ></div>
+    <script>
+        a4.onclick=()=>{
+            let a=a1.value;
+            let b=a2.value;
+            let c=a3.value;
+            let d='{<br/>"name" : "'+a+'", <br> "bgImg" : "img/img-00'+b+'.'+c+'", <br> "path" : "pages/'+a+'.html" <br> } ';
+            a5.innerHTML=d;
+        };
+    </script>
+</body>
+
+</html>

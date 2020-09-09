@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bouncing Ball</title>
+    <style>
+*{
+    outline:solid 0px #f00;
+}
+body{
+    margin:0;
+    font-family:Sans-Serif;
+}
+#canv1{
+    position:fixed;
+    z-index:2;
+    left:0;
+    top:0;
+    background:linear-gradient(30deg, #135, #111);
+}
+#sideBar{
+    position:fixed;
+    right:-12em;
+    top:0;
+    height:100%;
+    width:12em;
+    background:linear-gradient(30deg,#06aa,#123b);
+    transition:0.5s ease;
+    border-left:solid 2px #fff;
+    z-index:4;
+    text-align:center;
+    color:#fff;
+    overflow:auto;
+}
+#sideBar>div{
+    text-align:left;
+    margin-left:10px;
+}
+h5{
+    color:#fff;
+    text-align:center;
+    border-bottom:solid 1px #aaa;
+    margin:10px;
+}
+h1{
+    user-select:none;
+    color:#fff;
+    padding-top :3px;
+    font-size :1.9em;
+    text-align:center;
+    font-weight:100;
+    margin:2px;
+    border: solid 1px #aaa;
+    border-radius:2px;
+}
+input[type="range"]{
+    position:relative;
+    margin:0;
+    width:90%;
+    -webkit-appearance:none;
+    background:#fff5;
+    border:solid 1px #000;
+    border-radius:1em;
+    height:24px;
+    margin-top:10px;
+    margin-bottom:10px;
+    box-shadow:0  -5px 10px #000a inset;
+}
+input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:24px;
+    height:24px;
+    background:#fff;
+    border-radius:50%;
+    box-shadow:5px 5px 5px #0007 inset, -3px -3px 5px #0007;
+}
+input[type="color"]{
+    position:relative;
+    -webkit-appearance:none ;
+    height:0;
+    width:0;
+    outline:none;
+    background:#0000;
+    border:none;
+    display:block;
+    top:-3px;
+    left:10px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper{
+    -webkit-appearance:none;
+    background:#0000;
+    display:block;
+    width:0;
+    height:0;
+}
+input[type="color"]::-webkit-color-swatch{
+    -webkit-appearance:none;
+    width:24px;
+    height:24px;
+    display :block;
+    border:solid 2px #aaa;
+}
+input[type="text"]{
+    width:80%;
+    height:24px;
+    border:solid 1px #aaa;
+    font-family:courier;
+    background:#fff3;
+    text-align:center;
+    color:#fff;
+    font-weight:800;
+    text-shadow:0 1px 1px #000;
+}
+input[type="checkbox"]{
+    position:relative;
+    bottom:-3px;
+}
+button{
+    font-size:1.3em;
+    width:90%;
+    margin-bottom:5px;
+    background:#fff2;
+    border:solid 1px #fff;
+    color:#fff;
+    text-shadow:0 0 2px #000;
+    user-select:none;
+}
+button:active{
+    background:#0002;
+};
+    </style>
+</head>
+<body>
+    <canvas id="canv1"></canvas>
+    <div id="sideBar">
+        <h1>Bouncing Ball</h1>
+        
+        <h5>Gravity : <span id="sn1"></span></h5>
+        <input type="range" id="inp1" min=0 max=20 value="5" />
+        <h5>Friction : <span id="sn2"></span></h5>
+        <input type="range" id="inp2" min=0 max=20 value="1" />
+        
+        <h5>Advance</h5>
+        <button id="btn1">Accelarate</button>
+        <button id="btn2">Slow Down</button>
+        <button id="btn3">Stop</button>
+        
+        <h5>Experimental</h5>
+        <div>
+        <input type="checkbox" id="ckb1">
+        Remember Path<br>
+        <input type="checkbox" id="ckb2">
+        No Outline<br>
+        <input type="checkbox" id="ckb3">
+        Rainbow Color<br>
+        </div>
+        
+        <h5>--Info--</h5>
+        Adjusted for Android<br>
+        Best view on : chrome<br>
+        version : 2.2<br><hr>
+        Special Thanks To : W3, SoloLearn, Spck Editor<br><br>
+    </div>
+    <script>
+let h=innerHeight;
+let w=innerWidth;
+
+canv1.height=h;
+canv1.width=w;
+let ctx =canv1.getContext('2d');
+ctx.lineWidth=3;
+
+const drawBall=(x, y)=>{
+    ctx.beginPath();
+    
+    if(!Rpath){
+        ctx.clearRect(0,0,w,h);
+    };
+    
+     if(Rcol){
+    ctx.fillStyle='rgb('+frictn/2*25500+','+x/w*255+','+y/h*255+')';
+    };
+    
+    ctx.arc(x,y,18,0,2*Math.PI);
+    ctx.stroke();
+    ctx.fill();
+};
+
+//-------------------------------------------
+
+
+
+//-------------------------------------------
+let cy=50;
+let cx=50;
+let sp1=sp2=5;
+let gravt=0.5;
+let frictn=0.001;
+let Rpath=false;
+let Rcol=false;
+
+const main=()=>{
+   sp1=(cy<=20||cy>=h-20)?-sp1:sp1;
+   sp2=(cx<=20||cx>=w-20)?-sp2:sp2;
+   cy=(cy<=20)?20:(cy>=h-20)?h-20:cy;
+   cx=(cx<=20)?20:(cx>=w-20)?w-20:cx;
+   sp1=(sp1<0)?sp1+frictn:(sp1==0)?sp1:sp1-frictn;
+   sp2=(sp2<0)?sp2+frictn:(sp2==0)?sp2:sp2-frictn;
+    
+   sp1+=gravt;
+ //  sp2+=gravt;
+    
+   cy+=sp1;
+   cx+=sp2;
+   
+   drawBall(cx, cy);
+   requestAnimationFrame(main);
+};
+main();
+//-------------------------------------------
+
+
+//-------------------------------------------
+//for adjustments tools in Cpannel
+const adj=()=>{
+    sn1.innerHTML=inp1.value;
+    sn2.innerHTML=inp2.value;
+    
+    gravt=inp1.value/10;
+    frictn=inp2.value/1000;
+    
+    Rpath=ckb1.checked;
+    Rcol=ckb3.checked;
+    
+    if(ckb2.checked){ctx.strokeStyle='#0000';}
+    else{ctx.strokeStyle='#fff';};
+    if(!Rcol){ctx.fillStyle='#345';};
+};
+adj();
+inp1.addEventListener('input',adj);
+inp2.addEventListener('input',adj);
+ckb1.addEventListener('input',adj);
+ckb2.addEventListener('input',adj);
+ckb3.addEventListener('input',adj);
+btn1.onclick=()=>{
+    sp1=(sp1<0)?sp1-3:sp1+3;
+    sp2=(sp2<0)?sp2-3:sp2+3;
+};
+btn2.onclick=()=>{
+    sp1/=1.5;
+    sp2/=1.5;
+};
+btn3.onclick=()=>{
+    sp1=0;
+    sp2=0;
+};
+//-------------------------------------------
+
+
+
+//-------------------------------------------
+//for control panel PopUp
+let sbdx=sbx=0;
+canv1.addEventListener('touchstart',(ev)=>{
+    sbdx=ev.touches[0].clientX;
+});
+canv1.addEventListener('touchmove',(ev)=>{
+    sbx=ev.touches[0].clientX;
+});
+canv1.addEventListener('touchend', ()=>{
+    if(sbdx-sbx>100){sideBarOp(true)};
+});
+function sideBarOp(btnInfo1) {
+    if (btnInfo1) {
+        sideBar.style.right = "0";
+    }
+    else {
+        sideBar.style.right = -12*16+"px";
+    };
+};
+canv1.onclick=()=>{
+    sideBarOp(false);
+};
+sideBarOp(true);
+   </script>
+</body>
+
+</html>

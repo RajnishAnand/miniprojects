@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+body{
+    background :linear-gradient(#4E6B97, #dae2f8);
+/*background :linear-gradient(#ACB6E5, #74ebd5);*/
+    color:#ffffff;
+    background-attachment:fixed;
+    display:flex;
+    justify-content:center;
+    font-family:sans-serif;
+    font-weight:400;
+}
+noscript{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:#ff5500;
+    border-bottom:3px solid #ffffff;
+    line-height:1.5em;
+    text-align:center ;
+}
+#calc{
+    background:#55aaff22;
+    width:100%;
+    border:3px solid #ffffff;
+    box-shadow:0 0 5px #00000088;
+    border-radius:10px 10px 0 0;
+    overflow:auto;
+}
+input{
+    background:#ffffff33;
+    color:#ffffff;
+    width:100%;
+    outline:none;
+    border:none;
+    font-size:2em;
+    text-shadow:0 0 2px #000000;
+}
+#inp2{
+    text-align:right;
+    border-bottom:3px solid #ffffff;
+}
+table{
+    width:100%;
+    background:#292F43;
+    box-shadow:inset 0 0 0px 0px #000000aa;
+}
+td{
+    background :#292F43;
+    height:1.5em;
+    width:1.5em;
+    font-size:3.4em;
+    text-align:center;
+    line-height:1.5em;
+    user-select:none;
+    border-radius:5px;
+    box-shadow:inset 20px 20px 50px #ffffff25, 
+               inset -20px -20px 50px #00000022;
+}
+td:active{
+    box-shadow:none;
+    color:#00000000;
+    text-shadow:.3px .3px #ffffff;
+    background:#ffffff16;
+    box-shadow:0;
+} 
+.popuptxt{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    text-align:center;
+    background:#ffffff;
+    font-weight:900;
+    line-height:1.5em;
+    border-top:3px solid;
+    transition:0.5s ease-in;
+    opacity:1;
+}
+    </style>
+    <title>Calculator</title>
+</head>
+
+<body>
+    <noscript>
+        Your Browser doesn't support JavaScript
+    </noscript>
+    <div id="calc">
+        <input type="tel" id="inp1"><br>
+        <input type="tel" id="inp2" readonly />
+        <table>
+            <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td rowspan="2"></td></tr><tr><td colspan="2"></td><td></td></tr>
+        </table>
+    </div>
+    <div id="popupC"></div>
+    <script>
+let tdS=document.querySelectorAll('td');
+const chars=[
+    'AC','×' ,'÷' ,'⌫', 
+    '7' ,'8' ,'9' ,'+' ,
+    '4' ,'5' ,'6' ,'-' ,
+    '1' ,'2' ,'3' ,'=' , 
+    '0', '.'
+];
+
+window.onload=()=>{
+    for (let i=0;i<chars.length;i++){
+        tdS[i].innerHTML=chars[i];
+        tdS[i].addEventListener('click',main);
+    };
+    popup('welcome', 'green');
+};
+//-------------------------------------------
+
+
+
+//-------------------------------------------
+function main(ev){
+    let char =ev.currentTarget.innerHTML;
+    switch (char){
+        case chars[0]:
+            inp1.value='';
+            inp2.value='';
+            break;
+        case chars[3]:
+            inp1.value=inp1.value.slice(0,-1);
+            calci(inp1.value,false);
+            break;
+        case chars[15]:
+            calci(inp1.value,true);
+            break;
+        default:
+            inp1.value+=char;
+            calci(inp1.value,false);
+    }
+    
+};
+//-------------------------------------------
+
+
+
+//-------------------------------------------
+function calci(inp,tf){
+    
+    let ans=checkInp(inp);
+    if (inp.length==0){
+        inp2.value='';
+        inp2.style.borderBottom='3px solid #ffffff';
+    }
+    else if (tf){
+        if(ans===''){
+            inp2.style.borderBottom='3px solid #ff0000';
+            popup('Entered value is not valid!')
+        } 
+        else{
+        inp1.value=ans;
+        inp2.value='';
+        };
+    }
+    else{
+        inp2.value=ans;
+    }
+};
+function checkInp(inpt){
+    inpt=inpt.replace(chars[1],'*');
+    inpt=inpt.replace(chars[2],'/');
+    try{
+        let a=eval(inpt);
+        inp2.style.borderBottom= '3px solid #00ff00';
+        return a;
+    }
+    catch(err){
+        inp2.style.borderBottom='3px solid #ffffff';
+        return '';
+    }
+}
+//-------------------------------------------
+
+
+
+//-------------------------------------------
+const popup=(txt, col='red')=>{
+   
+   let el =document.createElement('div');
+   el.innerHTML=txt;
+   el.className='popuptxt';
+   el.style.color=col;
+   
+   popupC.innerHTML='';
+   popupC.appendChild(el);
+   setTimeout(()=>{try{
+       el.style.bottom='-1em';
+       el.style.opacity='0';
+       setTimeout(()=>{try{
+           popupC.removeChild(el);
+       }catch(err){}},600);
+   }catch(err){}},2000 )
+}
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            background: #222222;
+            color: #222222;
+            text-shadow: 1px 1px 0px skyblue,
+                -1px -1px 0px deepskyblue;
+            font-size: 3em;
+        }
+
+        div {
+            border: solid 1px deepskyblue;
+            width: 70%;
+            height: 70vh;
+            transition: 0.3s ease-in-out;
+            text-align: center;
+        }
+
+        #b {
+            text-shadow: 1px 1px 0px #E65C00,
+                -1px -1px 0px yellow;
+            animation: 1s ani infinite;
+        }
+
+        @keyframes ani {
+            0% {
+                text-shadow: 1px 1px 0px #E65C00,
+                    -1px -1px 0px yellow;
+                font-size: 1em;
+            }
+
+            50% {
+                text-shadow: 1px 1px 0px yellow,
+                    -1px -1px 0px #E65C00;
+                font-size: 1.03em;
+            }
+
+            100% {
+                text-shadow: 1px 1px 0px #E65C00,
+                    -1px -1px 0px yellow;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="a">click anywhere to see effect</div>
+    <span id="b"></span>
+</body>
+<script>
+    var clickcount = 0,
+        wow = "";
+    document.addEventListener("click", function() {
+        clickcount++;
+        a.innerHTML = clickcount+'💵';
+        document.getElementById("a").style = "width:" + 100 * Math.random() + "%;height:" + 100 * Math.random() + "vh;";
+        if (clickcount >= 10) {
+            b.innerHTML = "Thanks For visiting."
+        };
+        if (clickcount >= 50) {
+            b.innerHTML = "💴"
+        };
+        if (clickcount >= 100) {
+            b.innerHTML = "💰"
+        };
+        if (clickcount >= 150) {
+            wow +="💸";
+            b.innerHTML = wow;
+        };
+    });
+</script>
+
+</html>
