@@ -1,0 +1,54 @@
+<!--Html part is made by Yuvraj Singh Sandhu
+Css part is made by Rajnish Anand-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Stylish Login Form</title>
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <body>
+        <form>
+            <fieldset>
+                <legend>Details</legend>
+                 Name: 
+                 <input type="text"><br></br>
+                 Password :
+                 <input type="password"><br/></br>
+                 Gender:<br>
+                 <input type="radio" name="selection">Male</br>
+            
+                 <input type="radio" name="selection">Female</br></br>
+                 Select Date of Birth: <input type="date" name="datemontyear"> <br></br>
+                 <input type="reset" value="Reset" onclick="popup('Form reset Suscessful ! ', '#00aa00')">
+                 <input type="button" value="Submit" onclick="popup('Thank you for your submission','#00aa00') "  />
+                <h1 id="demo"></h1>
+         </fieldset>
+    </form>
+
+<li><a href="https://www.sololearn.com/Profile/19540357/?ref=app">Yuvraj Singh Sandhu's profile on Sololearn'</a></li>
+<li><a href="https://www.sololearn.com/Profile/15610625/?ref=app">Rajnish Anand's profile on Sololearn'</a></li>
+
+    <!--for popUp-->
+<div id="popupC"></div>
+<script>
+const popup=(txt, col='deepskyblue')=>{
+   
+   let el =document.createElement('div');
+   el.innerHTML=txt;
+   el.className='popuptxt';
+   el.style.color=col;
+   
+   popupC.innerHTML='';
+   popupC.appendChild(el);
+   setTimeout(()=>{try{
+       el.style.bottom='-1em';
+       el.style.opacity='0';
+       setTimeout(()=>{try{
+           popupC.removeChild(el);
+       }catch(err){}},600);
+   }catch(err){}},2000 )
+}
+popup('welcome') ;
+</script>
+</body>
+</html>
