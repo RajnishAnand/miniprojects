@@ -56,7 +56,7 @@ window.onload=()=>{
         xhttp.onreadystatechange = function(){
             req(this);
         };
-        xhttp.open("GET", "/res/list.json?q="+Math.random(), true);
+        xhttp.open("GET", "res/list.json?q="+Math.random(), true);
         xhttp.send();
 };
 
