@@ -1,3 +1,14 @@
+/*-----------------------
+Created by Rajnish Anand 
+last updated :24 sept 2020
+--------------------------
+To use :
+add 👇 in your HTML
+<script src="https://bit.ly/2RVqZOI"></script>
+and to use👉 popup('your text','color')
+*/
+
+
 function popup(txt, col='#ff5500'){
    
    let el =document.createElement('div');
