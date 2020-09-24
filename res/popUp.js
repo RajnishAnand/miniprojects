@@ -1,12 +1,12 @@
-/*-----------------------
+/*------------------------
 Created by Rajnish Anand 
 last updated :24 sept 2020
---------------------------
+-------------------------------------------------
 To use :
 add 👇 in your HTML
-<script src="https://bit.ly/2RVqZOI"></script>
+<script src="http://rajnishanand.github.io/Minigram/res/popUp.js"></script>
 and to use👉 popup('your text','color')
-*/
+------------------------------------------------*/
 
 
 function popup(txt, col='#ff5500'){
