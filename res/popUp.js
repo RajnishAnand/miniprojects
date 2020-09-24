@@ -4,7 +4,7 @@ last updated :24 sept 2020
 -------------------------------------------------
 To use :
 add 👇 in your HTML
-<script src="http://rajnishanand.github.io/Minigram/res/popUp.js"></script>
+<script src="https://rajnishanand.github.io/Minigram/res/popUp.js"></script>
 and to use👉 popup('your text','color')
 ------------------------------------------------*/
 
