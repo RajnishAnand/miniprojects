@@ -69,11 +69,10 @@ td:active{
     background:#ffffff16;
     box-shadow:0;
 } 
-    </style>
-    <title>Calculator</title>
-</head>
 
-<body>
+    </style>
+    <title>Calculator 3.1</title>
+</head>
     <noscript>
         Your Browser doesn't support JavaScript
     </noscript>
@@ -113,6 +112,7 @@ function main(ev){
         case chars[0]:
             inp1.value='';
             inp2.value='';
+            inp2.style.borderColor='#ffffff';
             break;
         case chars[3]:
             inp1.value=inp1.value.slice(0,-1);
@@ -158,15 +158,14 @@ function checkInp(inpt){
     inpt=inpt.replace(chars[2],'/');
     try{
         let a=eval(inpt);
-        inp2.style.borderBottom= '3px solid #00ff00';
+        inp2.style.borderColor= '#00ff00';
         return a;
     }
     catch(err){
-        inp2.style.borderBottom='3px solid #ffffff';
+        inp2.style.borderColor='#ffffff';
         return '';
     }
 }
-
     </script>
 </body>
 
