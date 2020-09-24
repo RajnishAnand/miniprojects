@@ -69,19 +69,6 @@ td:active{
     background:#ffffff16;
     box-shadow:0;
 } 
-.popuptxt{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    text-align:center;
-    background:#ffffff;
-    font-weight:900;
-    line-height:1.5em;
-    border-top:3px solid;
-    transition:0.5s ease-in;
-    opacity:1;
-}
     </style>
     <title>Calculator</title>
 </head>
@@ -97,7 +84,7 @@ td:active{
             <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td rowspan="2"></td></tr><tr><td colspan="2"></td><td></td></tr>
         </table>
     </div>
-    <div id="popupC"></div>
+    <script src='http://rajnishanand.github.io/Minigram/res/popUp.js'></script>
     <script>
 let tdS=document.querySelectorAll('td');
 const chars=[
@@ -179,28 +166,7 @@ function checkInp(inpt){
         return '';
     }
 }
-//-------------------------------------------
 
-
-
-//-------------------------------------------
-const popup=(txt, col='red')=>{
-   
-   let el =document.createElement('div');
-   el.innerHTML=txt;
-   el.className='popuptxt';
-   el.style.color=col;
-   
-   popupC.innerHTML='';
-   popupC.appendChild(el);
-   setTimeout(()=>{try{
-       el.style.bottom='-1em';
-       el.style.opacity='0';
-       setTimeout(()=>{try{
-           popupC.removeChild(el);
-       }catch(err){}},600);
-   }catch(err){}},2000 )
-}
     </script>
 </body>
 
