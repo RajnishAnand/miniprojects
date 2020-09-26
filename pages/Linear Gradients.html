@@ -9,8 +9,7 @@
     <style>
         body {
             margin: 0;
-            height: 100vh;
-            transition: 1s ease;
+            background-attachment:fixed;
             font-family:sans-serif;
         }
 
@@ -65,11 +64,24 @@
             transform: translate(-50%);
             bottom: 10px;
         }
+        #cop{
+            position:fixed;
+            top:1.2em;
+            background:#00bfff;
+            padding:2px;
+            padding-left :5px;
+            padding-right:10px;
+            border :1px solid #ffffff;
+            border-radius:0 10px 10px 0;
+            font-family:Monospace;
+            font-size:1.5em;
+        }
     </style>
 </head>
 
 <body>
     <input id="colorNym" placeholder="your Gradient/Color">
+    <div id="cop">Copy</div>
     <span id="bod">
         <span id="nxt">Next</span>
         <select id="slct">
@@ -82,43 +94,52 @@
             <option value="7">8</option>
         </select>
     </span>
+    
     <script>
-        var a = 1;
-        body = document.body;
-        starty();
-        nxt.addEventListener("click", function() {
-            starty();
-            bod.style = '';
-        });
+var a = 1;
+body = document.body;
+starty();
+nxt.addEventListener("click",starty);
 
-        function starty() {
-            colar = gradienty();
-            body.style = 'background:' + colar + ';';
-            colorNym.value = colar;
-        };
+function starty() {
+    body.style.height=innerHeight+'px';
+    let color=gradienty();
+    body.style.background= color;
+    colorNym.value = color;
+};
 
-        function gradienty() {
-            y = rndmCol();
-            for (i = 1; i <= slct.value; i++) {
-                y += ',' + rndmCol();
-            };
-            x = 'linear-gradient(30deg,' + y + ')';
-            return x
-        };
+function gradienty() {
+    y = rndmCol();
+    for (i = 1; i <= slct.value; i++) {
+        y += ',' + rndmCol();
+    };
+    x = 'linear-gradient(30deg,' + y + ')';
+    return x;
+};
 
-        function rndmCol() {
-            x = 'rgb(' + rndmval(255) + ',' + rndmval(255) + ',' + rndmval(255) + ')';
-            return x;
-        };
+function rndmCol() {
+    x = 'rgb(' + rndmval(255) + ',' + rndmval(255) + ',' + rndmval(255) + ')';
+    return x;
+};
 
-        function rndmval(val) {
-            x = Math.ceil(Math.random() * val);
-            return x;
-        };
+function rndmval(val) {
+    x = Math.ceil(Math.random() * val);
+    return x;
+};
 
-        document.addEventListener("input", function() {
-            body.style = 'background:' + colorNym.value + ';';
-        });
+colorNym.addEventListener("input",()=>{
+    body.style.background=colorNym.value;
+})
+
+cop.addEventListener('click',()=>{
+    colorNym.select();
+    document.execCommand('copy');
+    cop.innerHTML='Copied';
+    setTimeout(()=>{
+        cop.innerHTML='Copy';
+        colorNym.blur();
+    },600);
+})
     </script>
 </body>
 
