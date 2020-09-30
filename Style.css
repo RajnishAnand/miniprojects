@@ -50,7 +50,7 @@ h1{
     height:15em;
     width:25em;
     border-radius:5px;
-     box-shadow:0 0 0 3px inset #ffffff,
+    box-shadow:0 0 0 3px inset #ffffff,
                 0 25px #383793 inset, 
                 0 26px #ffffff inset; 
     line-height:25px;
