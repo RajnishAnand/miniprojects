@@ -1,67 +1,128 @@
 [
      {
         "name" : "Addictive clicks", 
-        "bgImg" : "img/img-008.jpg", 
+        "index" : "008",
+        "level" : "good", 
+        "details": "Addictive clicks! click to increase your money 💵.", 
+        "lastUpdated": "31/03/2020",
+        "created":"03/11/2019",
         "path" : "pages/Addictive clicks.html" 
     },
     {
         "name" : "Rect-SVG effect", 
-        "bgImg" : "img/img-010.jpg", 
+        "index" : "010",
+        "level" : "not good", 
+        "details": "random generated rectangles effect.", 
+        "lastUpdated": "31/03/2020",
+        "created":"uknown",
         "path" : "pages/Rect-SVG effect.html" 
     }, 
     {
         "name" : "Linear Gradients", 
-        "bgImg" : "img/img-007.jpg", 
+        "index" : "007",
+        "level" : "good", 
+        "details": "A tool to find cool gradients, it generates random linear gradient with custom options.", 
+        "lastUpdated": "31/03/2020",
+        "created":"17/01/2020",
         "path" : "pages/Linear Gradients.html" 
     },  
     {
         "name" : "Calculator 2.4", 
-        "bgImg" : "img/img-006.jpg", 
+        "index" : "006",
+        "level" : "good", 
+        "details": "A Simple old calculator [without eval function]. with jumping balls.", 
+        "lastUpdated": "31/03/2020",
+        "created":"08/01/2020",
         "path" : "pages/Calculator 2.4.html" 
     },
     {
         "name" : "Stone Paper Scissor", 
-        "bgImg" : "img/img-009.jpg", 
+        "index" : "009",
+        "level" : "better", 
+        "details": "Computer vs Player stone paper scissor game.", 
+        "lastUpdated": "17/08/2020",
+        "created":"28/01/2020",
         "path" : "pages/Stone Paper Scissor.html" 
     }, 
     {
         "name" : "Clock", 
-        "bgImg" : "img/img-005.jpg", 
+        "index" : "005",
+        "level" : "better", 
+        "details": "Digital Clock with cool effects.", 
+        "lastUpdated": "31/03/2020",
+        "created":"22/01/2020" ,
         "path" : "pages/Clock.html" 
     },
     {
         "name" : "Tic Tack Toe", 
-        "bgImg" : "img/img-003.jpg",
+        "index" : "003",
+        "level" : "good", 
+        "details": "2-Player Tic tac toe game board.", 
+        "lastUpdated": "31/05/2020",
+        "created":"31/05/2020",
         "path" : "pages/Tic Tack Toe.html"
     },  
     {
         "name" : "My Drawing Book", 
-        "bgImg" : "img/img-004.jpg",
+        "index" : "004",
+        "level" : "better", 
+        "details":"My Drawing book as in the title. <br>[For Touch Devices] ", 
+        "lastUpdated": "29/08/2020",
+        "created":"15/04/2020",
         "path" : "pages/My Drawing Book.html"
     },
     {
         "name" : "3D Cube", 
-        "bgImg" : "img/img-001.jpg",
+        "index" : "001",
+        "level" : "best", 
+        "details": "3D Rotating Cube manually or Auto rotate. <br>[For Touch Devices]", 
+        "lastUpdated": "05/10/2020",
+        "created":"15/02/2020",
         "path" : "pages/3D Cube.html"
     }, 
     {
-        "name" : "SVG Paint", 
-        "bgImg" : "img/img-002.jpeg",
+        "name" : "SVG Paint 2.3", 
+        "index" : "002",
+        "level" : "good", 
+        "details": "Old SVG based Paint. <br>[For Touch Devices] ", 
+        "lastUpdated": "05/04/2020",
+        "created":"23/03/2020",
         "path" : "pages/SVG Paint.html"
     },
     {
-        "name" : "CanvasPaint", 
-        "bgImg" : "img/img-011.jpg", 
+        "name" : "CanvasPaint 3.2", 
+        "index" : "011",
+        "level" : "better", 
+        "details":"Canvas based Paint with custom tools.<br>[For Touch Devices] ", 
+        "lastUpdated": "17/08/2020",
+        "created":"12/07/2020",
         "path" : "pages/CanvasPaint.html" 
     },
     {
         "name" : "Bouncing Ball", 
-        "bgImg" : "img/img-012.jpg", 
+        "index" : "012",
+        "level" : "better", 
+        "details": "A Bouncing ball with gravity-fricton controller.<br>[For Touch Devces] ", 
+        "lastUpdated": "29/08/2020",
+        "created":"26/07/2020",
         "path" : "pages/Bouncing Ball.html" 
     }, 
     {
-        "name" : "Calculator 3.0", 
-        "bgImg" : "img/img-013.jpg", 
+        "name" : "Calculator 3.1", 
+        "index" : "013",
+        "level" : "better", 
+        "details": "A Simple Updated Calculator.", 
+        "lastUpdated": "16/10/2020",
+        "created":"17/09/2020",
         "path" : "pages/Calculator 3.0.html" 
+    }, 
+    {
+        "name":"Canvas Paint 4.1",
+        "index":"014",
+        "level":"best",
+        "details":"The Paint app with basic functions. <br>[For Touch Devices]", 
+        "lastUpdated": "04/12/2020",
+        "created":"03/11/2020",
+        "path":"https://rajnishanand.github.io/paint"
     }
 ]

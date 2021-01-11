@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculator 2.4</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
+        <style>
+body {
+    background: linear-gradient(30deg,rgb(225,100,0),rgb(225,255,0));
+    color:#0ef;
+    margin:0px;
+    font-family:monospace;
+}
+table{
+    touch-action:none;
+}
+td{
+    background:rgba(0,0,0,0.9);
+    font-size:4.429em;
+    height:1.41em;
+    width:1.5em;
+    text-align:center;
+    touch-action:none;
+    user-select:none;
+}
+td:active{
+    background:#555;
+}
+#dot{
+}
+.input{
+    font-size:2em;
+    width:99%;
+    height:1.28em;
+    background:#222222;
+    color:inherit;
+    text-align:right;
+    border-width:0px;
+    outline:none;
+}
+#input2{
+    margin-bottom:3px;
+    font-size:2em;
+    word-wrap:break-word;
+    margin-left:2px;
+    height:1.2em;
+}
+#display{
+    background:#222222;
+    margin:2px;
+    margin-bottom:0px;
+}
+footer{
+    background:rgba(0,0,0,0.8);
+    color:white;
+    font-weight:2px;
+    position:fixed;
+    bottom:0;
+    width:100%;
+    font-family:courier;
+    border-top:solid 1px deepskyblue;
+    padding:1px;
+    text-align:center;
+    transition:1s all ease;
+    height:1.2em;
+}
+#follow{
+    background:#333333;
+    float:right;
+    padding:5px;
+    padding-left:20px;
+    padding-right:20px;
+    border:solid 1px #aaaaaa;
+    margin-right:8px;
+}
+a{
+    text-decoration:none;
+    color:inherit;
+}
+.balls{
+    background:;
+    color:white;
+    height:1em;
+    width:1em;
+    position:fixed;
+    transition:0.7s linear;
+    font-size:0.4em;
+    top:0;
+    left:;
+    border-radius:50%;
+    font-family:monospace;
+    text-align:center;
+    border:solid 0.3px black;
+}
+.opr{
+    color:;
+}
+#reed{
+    color:red;
+}
+        </style>
+    </head>
+    <body>
+        <div id="display">
+            <div id="input2"></div>
+            <input id="input1" class="input" placeholder="0" type="number">
+        </div>
+        <table>
+            <tr>
+                <td id="clearall" class="opr" onClick="clsA()">C</td>
+                <td id="sum" class="opr" onClick="opertor('sum')">+</td>
+                <td id="sub" class="opr" onClick="opertor('sub')">-</td>
+                <td id="clear" class="opr" onClick="cls()">⌫</td>
+            </tr>
+            <tr>
+                <td id="one" class="num" onClick="input(1)">1</td>
+                <td id="two" class="num" onClick="input(2)">2</td>
+                <td id="three" class="num" onClick="input(3)">3</td>
+                <td id="mul" class="opr" onClick="opertor('mul')">×</td>
+            </tr>
+            <tr>
+                <td id="four" class="num" onClick="input(4)">4</td>
+                <td id="five" class="num" onClick="input(5)">5</td>
+                <td id="six" class="num" onClick="input(6)">6</td>
+                <td id="div" class="opr" onClick="opertor('div')">÷</td>
+            </tr>
+            <tr>
+                <td id="seven" class="num" onClick="input(7)">7</td>
+                <td id="eight" class="num" onClick="input(8)">8</td>
+                <td id="nine" class="num" onClick="input(9)">9</td>
+                <td></td>
+            <tr>
+                <td></td>
+                <td id="zero" class="num" onClick="input(0)">0</td>
+                <td id="equal" class="opr" onClick="calculate()" colspan=2>=</td>
+            </tr>
+            </tr>
+        </table>
+        <footer id="footer">
+            By Rajnish Anand । 2020 ।
+        </footer><br/><br/><br/>
+        <div id="bal"></div>
+
+<!--script for small balls jumping around-->
+        <script>
+var noBall=0;
+
+//sets Number of balls
+function startt(){
+    bal.innerHTML ="";
+    for (i=1;i<=noBall;i++){
+        bal.innerHTML+='<div id="a'+i+'" class="balls"></div>';
+    };
+};
+
+//calls manager every 0.7s
+setInterval(mangr,700);
+
+//manager's list
+function mangr(){
+    for (i=1;i<=noBall;i++){
+        moveit("a"+i);
+    };
+};
+
+//sets given position and color
+function moveit(name){
+document.getElementById(name).style="top:"+rndm('top')+"vh; left:"+rndm('left')+"%; background:"+rndm('color')+";";
+};
+
+//sends random positions and colors
+function rndm(xy){
+if(xy=="left"){
+    postn=Math.ceil(Math.random()*94);
+};
+if(xy=="top"){
+    postn=Math.ceil(Math.random()*85);
+};
+if(xy=="color"){
+    dice=Math.ceil(Math.random()*6);
+    if (dice==1){postn="deepskyblue";};
+    if (dice==2){postn="rgba(0,0,0,0)";};
+    if (dice==3){postn="blue";};
+    if (dice==4){postn="#fff";};
+    if (dice==5){postn="yellow";};
+    if (dice==6){postn="orange";};
+    if (dice==7){postn="aqua";};
+};
+return postn;
+};
+
+        </script>
+        
+<!--Script for Calculator-->
+        <script>
+        var action,mmry;
+setInterval(chek,5000);
+
+//it runs when any number key is pressed
+function input(num){
+if (key().length<=15){
+document.getElementById("input1").value+=num;
+};
+numactive();
+};
+
+function key(){
+keyvalue=document.getElementById("input1").value;
+return keyvalue;
+};
+
+function opertor(opr){
+if (document.getElementById("input2").innerHTML.length>=1){
+if (action.length==3){
+document.getElementById("equal").click();
+};
+};
+mmry=key();
+action=opr;
+if (action=="sum"){
+input2.innerHTML=mmry+'+';
+};
+if (action=="sub"){
+input2.innerHTML=mmry+'-';
+};
+if (action=="mul"){
+input2.innerHTML=mmry+'×';
+};
+if (action=="div"){
+input2.innerHTML=mmry+'÷';
+};
+document.getElementById("input1").value="";
+numactive();
+};
+
+function calculate(){
+if (action=="sum"){
+document.getElementById("input1").value=mmry/1+key()/1;
+};
+if (action=="sub"){
+document.getElementById("input1").value=mmry/1-key()/1;
+};
+if (action=="mul"){
+document.getElementById("input1").value=mmry/1*key()/1;
+};
+if (action=="div"){
+document.getElementById("input1").value=mmry/1/key()/1;
+};
+document.getElementById("input2").innerHTML="";
+mmry=0,action="";
+numactive();
+};
+
+function clsA(){
+document.getElementById("input1").value="";
+document.getElementById("input2").innerHTML="";
+action="";
+mmry="";
+numactive();
+};
+
+function cls(){
+document.getElementById("input1").value= document.getElementById("input1").value.slice(0,-1);
+numactive();
+};
+function chek(){
+    if(input1.value==""){
+        cls();
+        if(input2.innerHTML==""){
+            clsA();
+        };
+    };
+    numactive();
+    noBall=Math.ceil(Math.random()*10);
+    startt ();
+};
+
+function numactive(){
+    if (input1.value.length<=15){
+        inactive("num",1);
+    }
+    else{
+        inactive("num",0);
+    };
+};
+
+function inactive(nym,co){
+if(co==0){co="background:#555";};
+if(co==1){co="background:;";};
+nym=document.getElementsByClassName(nym);
+    for (i=0;i<nym.length;i++){
+        nym[i].style=co;
+    };
+};
+
+document.addEventListener("click",function(){
+    footer.style.height="0";
+});
+        </script>
+    </body>
+</html>
