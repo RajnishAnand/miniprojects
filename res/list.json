@@ -124,5 +124,14 @@
         "lastUpdated": "04/12/2020",
         "created":"03/11/2020",
         "path":"https://rajnishanand.github.io/paint"
+    }, 
+    {
+        "name":"Factor Calculator", 
+        "index":"015",
+        "level":"better",
+        "details":"A sample Factor Calculator.",
+        "lastUpdated":"23/01/2021",
+        "created":"23/01/2021", 
+        "path":"pages/Factor Calculator"
     }
 ]
