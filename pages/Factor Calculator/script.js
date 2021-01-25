@@ -22,7 +22,7 @@ function main(){
             if(fctrs.length==2){
                 txt='It is a Prime Number<br>as its factors are 1 and itself.<br><br>';
             }
-            else{
+            else if (fctrs.length>2){
                 txt='It is a Composite Number and it has '+fctrs.length+' Factors as :<br><br> ';
             };
             break;
